@@ -1,0 +1,22 @@
+apiVersion: apps/v1 
+kind: Deployment
+metadata:
+  name: demo-ui
+spec: 
+  selector:
+    matchLabels:
+      app: demo-ui
+  replicas: 3 
+  template:
+    metadata:
+      labels:
+        app: demo-ui
+    spec:
+      containers:
+      - name: demo-ui
+        image: drehnstrom/events-external-del:v1.0
+        env: 
+        - name: SERVER
+          value: "http://demo-service:8082"
+        ports:
+        - containerPort: 8080
